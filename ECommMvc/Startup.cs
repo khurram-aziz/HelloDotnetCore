@@ -18,8 +18,8 @@ namespace ECommMvc
         static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
         {
             //return ConnectionMultiplexer.Connect("redis,abortConnect=false,ssl=false");//,password=...
-            return ConnectionMultiplexer.Connect("localhost,abortConnect=false,ssl=false,password=foobaar");//,password=...
-            var hostEntry = Dns.GetHostEntryAsync("redis").Result;
+            //return ConnectionMultiplexer.Connect("localhost,abortConnect=false,ssl=false,password=foobaar");//,password=...
+            var hostEntry = Dns.GetHostEntryAsync("cache").Result;
             var ips =   (from ip in hostEntry.AddressList
                         where ip.AddressFamily == AddressFamily.InterNetwork
                         select ip.ToString()).ToList();

@@ -1,3 +1,6 @@
+http://paoloibarra.com/2016/04/10/Seed-PostgreSQL-DB-Docker/
+    Adding a Seed File to Populate Dockerized PostgreSQL 
+
 http://www.npgsql.org/efcore/index.html
     Postgres EF Core
 

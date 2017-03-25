@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
+using ECommMvc.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 namespace ECommMvc
 {
@@ -17,6 +15,11 @@ namespace ECommMvc
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
+
+            using(var db = new ECommContext())
+            {
+                db.Database.Migrate();
+            }
 
             host.Run();
         }

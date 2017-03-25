@@ -18,7 +18,7 @@ namespace ECommMvc.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Database=EComm;Username=postgres;Password=postgres;");
+            optionsBuilder.UseNpgsql("Host=db;Database=EComm;Username=postgres;Password=postgres;");
         }
     }
 }
