@@ -1,4 +1,6 @@
-﻿@{
+﻿@using ECommMvc.Models;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -69,7 +71,6 @@
     <div class="col-md-3">
         <h2>Counters</h2>
         <ul>
-        <ul>
             <li>This page is visited @ViewData["counter"] times!</li>
             <li>We served @ViewData["visitors"] unique visitors!</li>
         </ul>
@@ -80,5 +81,14 @@
         <distributed-cache name="PromoPartial" expires-after="@TimeSpan.FromSeconds(30)">
             @Html.Partial("PromoPartial")
         </distributed-cache>
+    </div>
+    <div class="col-md-3">
+        <h2>Products</h2>
+        <ul>
+            @foreach(var product in (IEnumerable<Product>)this.ViewData["Products"])
+            {
+                <li>@product.Title</li>
+            }
+        </ul>
     </div>
 </div>

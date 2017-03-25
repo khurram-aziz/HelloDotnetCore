@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommMvc.Models;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ECommMvc.Controllers
 {
@@ -8,12 +10,20 @@ namespace ECommMvc.Controllers
         //but it will not have Redis rich data type apis; like INCR
         public IActionResult Index()
         {
-            var db = Startup.RedisConnection.GetDatabase();
+            var cache = Startup.RedisConnection.GetDatabase();
             //await db.StringIncrementAsync("hitcounter");
-            db.StringIncrement("hitcounter");
+            cache.StringIncrement("hitcounter");
             
-            var counter = db.StringGet("hitcounter");
-            var visitors = db.SetLength("visitor");
+            using (var db = new ECommContext())
+            {
+                var products = (from p in db.Products
+                                where p.Rating > 3
+                                select p).ToArray();
+                this.ViewData["Products"] = products;
+            }
+
+            var counter = cache.StringGet("hitcounter");
+            var visitors = cache.SetLength("visitor");
 
             this.ViewData["counter"] = counter;
             this.ViewData["visitors"] = visitors;
